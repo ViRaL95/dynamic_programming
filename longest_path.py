@@ -30,17 +30,10 @@ def dfs(current_vertice, adjacency_list, indegree, visited, distance_map):
 
 
 def build_adjacency_list_indegree(N, edges):
-    adjacency_list = {}
+    adjacency_list = {vertice: [] for vertice in range(1, N + 1)}
     indegree = [0] * N
-    print(indegree)
     for source, destination in edges:
-        if source not in adjacency_list:
-            adjacency_list[source] = [destination]
-        else:
-            adjacency_list[source].append(destination)
-
-        if destination not in adjacency_list:
-            adjacency_list[destination] = []
+        adjacency_list[source].append(destination)
 
         indegree[destination - 1] += 1
 
@@ -48,4 +41,4 @@ def build_adjacency_list_indegree(N, edges):
 
 
 if __name__ == '__main__':
-    print(find_longest_path(4, [[1, 2], [1, 3], [3, 2], [2, 4], [3, 4]]))
+    print(find_longest_path(6, [[2, 3], [4, 5], [5, 6]]))
