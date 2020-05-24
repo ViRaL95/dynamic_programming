@@ -27,10 +27,51 @@ def dfs(row_index, column_index, grid, memo_grid):
     return memo_grid[row_index][column_index]
 
 
+
+def dp_way(grid):
+    dp_grid = [[0] * len(grid[0]) for row in grid]
+
+
+    row_blocked, column_blocked = False, False
+    for row_index in range(len(grid) - 1, -1, -1):
+        for column_index in range(len(grid[0]) - 1, -1, -1):
+            if row_index == len(grid) - 1:
+                if grid[row_index][column_index] == '#':
+                    row_blocked = True
+                if not row_blocked:
+                    dp_grid[row_index][column_index] = 1
+                else:
+                    dp_grid[row_index][column_index] = 0
+
+            if column_index == len(grid[0]) - 1:
+                if grid[row_index][column_index] == '#':
+                    column_blocked = True
+
+                if not column_blocked:
+                    dp_grid[row_index][column_index] = 1
+
+                else:
+                    dp_grid[row_index][column_index] = 0
+
+    print(dp_grid)
+
+    for row_index in range(len(grid) - 2, -1, - 1):
+        for column_index in range(len(grid[0]) - 2, - 1, -1):
+            if grid[row_index][column_index] == '#':
+                dp_grid[row_index][column_index] = 0
+            else:
+                dp_grid[row_index][column_index] = dp_grid[row_index + 1][column_index] + dp_grid[row_index][column_index + 1]
+
+    print(dp_grid)
+    return dp_grid[0][0]
+
+
+
+
 if __name__ == '__main__':
     grid = [
         ['.', '.', '.', '#'],
         ['.', '#', '.', '.'],
         ['.', '.', '.', '.']
     ]
-    print(solve(grid))
+    print((dp_way(grid)))
