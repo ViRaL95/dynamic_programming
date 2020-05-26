@@ -1,5 +1,5 @@
 from typing import List
-
+from pprint import pprint
 
 def solve(grid: List[List[str]]):
     memo_grid = [[None] * len(grid[0]) for row in range(len(grid))]
@@ -66,12 +66,8 @@ def dp_way(grid):
     return dp_grid[0][0]
 
 
-
-
 if __name__ == '__main__':
-    grid = [
-        ['.', '.', '.', '#'],
-        ['.', '#', '.', '.'],
-        ['.', '.', '.', '.']
-    ]
+    grid = [['.'] * 20 for row in range(1, 21)]
+
+    print(len(grid), len(grid[0]))
     print((dp_way(grid)))
